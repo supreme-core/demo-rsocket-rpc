@@ -11,8 +11,9 @@ public class DemoServer {
     public static void main(String[] args) {
         SimpleServiceServer server = new SimpleServiceServer(new DemoService(), Optional.empty(), Optional.empty());
 
+
         RSocketFactory.receive()
-                .acceptor((connectionSetupPayload, rSocket) -> Mono.just(new RequestHandlingRSocket(server)))
+                .acceptor((connectionSetupPayload1, rSocket1) -> Mono.just(new RequestHandlingRSocket(server)))
                 .transport(TcpServerTransport.create(8801))
                 .start()
                 .log("start")
@@ -20,5 +21,6 @@ public class DemoServer {
                 .onClose()
                 .log("onClose")
                 .block();
+
     }
 }
